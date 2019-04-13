@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '@/views/Home.vue';
+import About from '@/views/About.vue';
 // import enterLogerGuard from './enter-loger.guard';
 
 Vue.use(Router);
@@ -14,6 +15,11 @@ export default new Router({
             meta: {
                 requiresAuth: true,
             },
+        },
+        {
+            path: '/about',
+            name: 'about',
+            component: About,
         },
         {
             path: '/user/:userId',
