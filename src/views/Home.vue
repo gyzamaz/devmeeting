@@ -1,18 +1,20 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <input type="text" v-model="userId" placeholder="user id">
+    <button @click="goToUser(userId)">Go to user</button>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
-export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  }
-}
+  export default {
+    name: 'home',
+    data: () => ({
+      userId: '',
+    }),
+    methods: {
+      goToUser(id) {
+        this.$router.push({ name: 'user', params: { userId: id } });
+      },
+    },
+  };
 </script>
