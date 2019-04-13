@@ -1,21 +1,30 @@
 <template>
-    <button :class="{
+    <span :class="{
       'spinner': true,
       'default-styles': styled,
       'loading': loading,
     }"
     :disabled="loading"
-    type="button"
     >
-        <slot>Submit</slot>
+        <ul>
+         <slot name="options" v-for=" option in options" :option="option">
+             <li v-bind:key="option.id">
+                     {{ option }}
+             </li>
+         </slot>
+        </ul>
         <span class="spinner"></span>
-    </button>
+    </span>
 </template>
 
 <script>
     export default {
-        name: "BaseButton",
+        name: "ElementList",
         props: {
+            // textButton: {
+            //     type: String,
+            //     required: true
+            // },
             loading: {
                 type: Boolean,
                 required: false,
@@ -25,6 +34,22 @@
                 type: Boolean,
                 required: false,
                 default: true
+            }
+        },
+        data() {
+            return {
+                options: [
+                    {
+                        id: 0,
+                        text: 'Eat pizza',
+                        createdAt: '2019-02-02T12:43:35.404Z',
+                    },
+                    {
+                        id: 1,
+                        text: 'Eat burger',
+                        createdAt: '2019-02-02T12:43:35.404Z',
+                    },
+                ],
             }
         }
     };

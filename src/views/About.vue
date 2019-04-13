@@ -5,22 +5,30 @@
                 v-bind="rate"
         />
 
-        <BaseInput value="ssss" />
+        <BaseInput v-model="message" value="ssss" />{{message}}<br>
+        <ElementList @click.native="handleClick" :loading="isLoading">
+            <template #onex>
+                ={{ textButtonOne }}=
+            </template>
 
-        <BaseButton @click.native="handleClick" :loading="isLoading"/>
+            <template #options="{option}">
+                {{option}}
+            </template>
+
+        </ElementList>
 
     </div>
 </template>
 
 <script>
     import Rate from '@/components/Rate.vue';
-    import BaseButton from "../components/BaseButton";
+    import ElementList from "../components/ElementList";
     import BaseInput from "../components/BaseInput";
 
     export default {
         components: {
             BaseInput,
-            BaseButton,
+            ElementList,
             Rate,
         },
         data: () => ({
@@ -30,7 +38,23 @@
                 color: 'green',
             },
             isLoading: false,
-            isStyled: true
+            isStyled: true,
+            message: '',
+            textButtonOne: 'Wyslij one',
+            options: [
+                {
+                    'id': 1,
+                    'text': '1'
+                },
+                {
+                    'id': 2,
+                    'text': '2'
+                },
+                {
+                    'id': 3,
+                    'text': '3'
+                }
+            ],
         }),
         methods: {
             handleClick() {
