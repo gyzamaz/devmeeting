@@ -1,18 +1,35 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+
+    <button @click="setAdmin"> Set isAdmin </button>
+    <button @click="removeAdmin"> Remove key isAdmin </button>
+
+    <ListOptions>
+      <template v-slot:options=" { option }">
+        <Option :data="option" />
+      </template>
+    </ListOptions>
+
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import ListOptions from '@/components/ListOptions.vue';
+import Option from '@/components/Option.vue';
 
 export default {
   name: 'home',
   components: {
-    HelloWorld,
+    Option,
+    ListOptions,
+  },
+  methods: {
+    setAdmin() {
+      localStorage.setItem('isAdmin', true);
+    },
+    removeAdmin() {
+      localStorage.setItem('isAdmin', false);
+    },
   },
 };
 </script>

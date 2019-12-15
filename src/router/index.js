@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
+import isAdminLocalStorageGuard from './isadmin-localstorage.guard';
 
 Vue.use(VueRouter);
 
@@ -9,14 +10,27 @@ const routes = [
     path: '/',
     name: 'home',
     component: Home,
+    meta: {
+      requiresAuth: true,
+    },
+    beforeEnter: isAdminLocalStorageGuard,
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    path: '/vote',
+    name: 'vote',
+    component: () => import(/* webpackChunkName: "vote" */ '../views/Vote.vue'),
+    beforeEnter: isAdminLocalStorageGuard,
+  },
+  {
+    path: '/score',
+    name: 'score',
+    component: () => import(/* webpackChunkName: "score" */ '../views/Score.vue'),
+    beforeEnter: isAdminLocalStorageGuard,
+  },
+  {
+    path: '/settings',
+    name: 'settings',
+    component: () => import(/* webpackChunkName: "settings" */ '../views/Settings.vue'),
   },
 ];
 
